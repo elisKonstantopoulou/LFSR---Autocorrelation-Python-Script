@@ -1,8 +1,7 @@
-# LFSR-and-Autocorrelation-Python-Script
-This Python script is part of a larger exercise for my Cryptography course in university. In that exercise I used LFSR to generate a pseudorandom binary sequence and used Python to calculate the autocorrelation of that sequence, in order to validate Golomb's third postulate for randomness. In the end of this file you will find the resources I used.
+# LFSR and Autocorrelation Python Script
+This is a larger exercise for my Cryptography course in university. We were asked to use LFSR to generate a pseudorandom binary sequence and check if it satisfies Golomb's postulates for randomness. I used Python to calculate the autocorrelation of that sequence (Golomb's 3<sup>rd</sup> postulate). In the end of this file you will find the resources I used.
 
 ## LFSR Introduction
----
 Linear Feedback Shift Register is a shift register whose input bit is a linear function of its previous state. It lets us go through all possible combinations of zeros and ones given an array of bits, except for a sequence that consists of all zeros (it is later explained).
 Let's look at a simple example to understand how LFSR works; let's choose 1001 as our initial state.
 
@@ -49,7 +48,6 @@ There is more than one way to compute an LFSR; it is done by using different __t
 
 
 ## LFSR Code and Random Number Generator
----
 This is a Python script that implements an LFSR, with 1001 as the initial state:
 ```python
 state = 0b1001
@@ -72,7 +70,6 @@ It is important to remember that LFSR generates __*pseudorandom*__ numbers.
 
 
 ## Golomb's Postulates 
----
 Let's generate a number from the initial state 111010. We have 2<sup>6</sup>-1=63 possible combinations of 0s and 1s.
 Code to calculate the states:
 ```python
@@ -94,6 +91,7 @@ for i in range(63):
 The pseudorandom binary is: 010111111000001000011000101001111010001110010010110111011001101
 
 We will now examine whether Golomb's postulates are true.
+
 __Postulate #1__: the number of 1s and 0s must be equal, or differ at most by 1. This means that if we have an even amount of bits, the number of 1s and 0s must be the same, and if we have an odd number of bits, the number of 1s should differ from the number of 0s by one.
 Our binary sequence has 31 0s and 32 1s. Thus, the first postulate is true.
 
@@ -103,6 +101,8 @@ __Postulate #2__: 1/2 of the *runs (consecutive 1s and 0s)* must be of length 1,
 - 4 runs are of length 3 (4/32=1/8)
 Thus, the second postulate is true.
 
+<img src="/lfsr-golomb_screens/runs.png" width=50%>
+
 __Postulate #3__: for period=1, the autocorrelation must be stable
 In order to go forth with the Python script implementtion, we must first understand what autocorrelation and what an autocorrelation function are.
 
@@ -110,7 +110,8 @@ __Autocorrelation:__ given a binary sequence A of length n we get its autocorrel
 *Given A=(a<sub>0</sub>, a<sub>1</sub>, ..., a<sub>n-1</sub>), c(i)=XOR(A, A<<<i)*
 
 __Autocorrelation Function:__ it measures the similarity between the sequence and its phase shift by τ. This is its mathematical formula:
-...insert picture...
+
+<img src="/lfsr-golomb_screens/autocorrelation_function.png" width=50%>
 
 
 The Python script that calculates the autocorrelatio is the following:
@@ -158,9 +159,14 @@ for i in range(63):
 ```
 
 The output of the program is the following (part of it):
-... insert picture of result...
+
+<img src="/lfsr-golomb_screens/script_output.png" width=100%>
 
 
 
-
+### Resources
+---
+- https://www.youtube.com/watch?v=Ks1pw1X22y4&list=LL&index=7 
+- https://www.youtube.com/watch?v=yOGLLyVSrjo&list=LL&index=1&t=401s
+- https://www.geeksforgeeks.org/xor-of-two-binary-strings/ 
 
