@@ -58,7 +58,7 @@ for i in range(15):
 ```
 This script validates the calculations we did in the previous section. We notice that the 15th time the script is running, we return to the initial state.
 
-<img src="/lfsr-golomb_screens/res_01.png" width=50%>
+<img src="/lfsr-golomb_screens/res_01.png" width=20%>
 
 Now, we will create a pseudorandom number generator by changing only a few things in the above code; instead of printing all the states we will instead keep the last bit of each iteration and print them side by side:
 ```python
@@ -69,7 +69,7 @@ for i in range(15):
   state = (state >> 1) | (newBit << 3)
 ```
 
-<img src="/lfsr-golomb_screens/res_02.png" width=70%>
+<img src="/lfsr-golomb_screens/res_02.png" width=40%>
 
 It is important to remember that LFSR generates __*pseudorandom*__ numbers.
 
@@ -107,7 +107,7 @@ __Postulate #2__: 1/2 of the *runs (consecutive 1s and 0s)* must be of length 1,
 - 4 runs are of length 3 (4/32=1/8)
 Thus, the second postulate is true.
 
-<img src="/lfsr-golomb_screens/runs.png" width=50%>
+<img src="/lfsr-golomb_screens/runs.png" width=70%>
 
 
 __Postulate #3__: for period=1, the autocorrelation must be stable
@@ -118,7 +118,7 @@ __Autocorrelation:__ given a binary sequence A of length n we get its autocorrel
 
 __Autocorrelation Function:__ it measures the similarity between the sequence and its phase shift by τ. This is its mathematical formula:
 
-<img src="/lfsr-golomb_screens/autocorrelation_function.png" width=50%>
+<img src="/lfsr-golomb_screens/autocorrelation_function.png" width=30%>
 
 
 The Python script that calculates the autocorrelatio is the following:
