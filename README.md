@@ -12,14 +12,14 @@ Now 1100 is our current state and the output is 0. Let's repeat the previous ste
 We repeat this process until we return to our initial state. In the tables below you will find the XOR gate table (for help) and a table where we calculate all the states.
 
 | __A__ | __B__ | __XOR__ |
-| --- | --- |
+| --- | --- | --- |
 | 1 | 1 | 0 |
 | 1 | 0 | 1 |
 | 0 | 1 | 1 |
 | 0 | 0 | 0 |
 
 |  |  |  | __Output__ |
-| --- | --- |
+| --- | --- | --- | --- |
 | 1 | 0 | 0 | 1 | 1 |
 | 1 | 1 | 0 | 0 | __0__ |
 | 0 | 1 | 1 | 0 | __0__ |
