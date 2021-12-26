@@ -69,7 +69,7 @@ for i in range(15):
   state = (state >> 1) | (newBit << 3)
 ```
 
-<img src="/lfsr-golomb_screens/res_02.png" width=10%>
+<img src="/lfsr-golomb_screens/res_02.png" width=20%>
 
 It is important to remember that LFSR generates __*pseudorandom*__ numbers.
 
