@@ -1,7 +1,8 @@
 # LFSR-and-Autocorrelation-Python-Script
 This Python script is part of a larger exercise for my Cryptography course in university. In that exercise I used LFSR to generate a pseudorandom binary sequence and used Python to calculate the autocorrelation of that sequence, in order to validate Golomb's third postulate for randomness. In the end of this file you will find the resources I used.
 
-### LFSR Introduction
+## LFSR Introduction
+---
 Linear Feedback Shift Register is a shift register whose input bit is a linear function of its previous state. It lets us go through all possible combinations of zeros and ones given an array of bits, except for a sequence that consists of all zeros (it is later explained).
 Let's look at a simple example to understand how LFSR works; let's choose 1001 as our initial state.
 
@@ -47,7 +48,8 @@ To conclude this section, given __*n bits*__, the __*maximum period*__ would be 
 There is more than one way to compute an LFSR; it is done by using different __taps__  (points where you chose to perform the XOR). There are mathematical ... that ..., but they will  not be covered here.
 
 
-### LFSR Code and Random Number Generator
+## LFSR Code and Random Number Generator
+---
 This is a Python script that implements an LFSR, with 1001 as the initial state:
 ```python
 state = 0b1001
@@ -69,7 +71,8 @@ for i in range(15):
 It is important to remember that LFSR generates __*pseudorandom*__ numbers.
 
 
-### Golomb's Postulates 
+## Golomb's Postulates 
+---
 Let's generate a number from the initial state 111010. We have 2<sup>6</sup>-1=63 possible combinations of 0s and 1s.
 Code to calculate the states:
 ```python
