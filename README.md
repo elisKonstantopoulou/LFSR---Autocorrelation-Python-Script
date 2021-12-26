@@ -1,11 +1,11 @@
 # LFSR and Autocorrelation Python Script
-This is a larger exercise for my Cryptography course in university. We were asked to use LFSR to generate a pseudorandom binary sequence and check if it satisfies Golomb's postulates for randomness. I used Python to calculate the autocorrelation of that sequence (Golomb's 3<sup>rd</sup> postulate). In the end of this file you will find the resources I used.
+This is an exercise for my Cryptography course in university. We were asked to use LFSR to generate a pseudorandom binary sequence and check if it satisfies Golomb's postulates for randomness. I used Python to calculate the autocorrelation of that sequence (Golomb's 3<sup>rd</sup> postulate). In the end of this file you will find the resources I used.
 
 ## LFSR Introduction
-Linear Feedback Shift Register is a shift register whose input bit is a linear function of its previous state. It lets us go through all possible combinations of zeros and ones given an array of bits, except for a sequence that consists of all zeros (it is later explained).
+Linear Feedback Shift Register is a shift register whose input bit is a linear function of its previous state. It lets us go through all possible combinations of 1s and 0s given a sequence of bits, except for a combination that consists of all 0s (it is later explained).
 Let's look at a simple example to understand how LFSR works; let's choose 1001 as our initial state.
 
-The output of our initial, and current, state is 1 (the output is the last bit). Every time we iterate, we will shift all the bits one spot to the right; thus 1001 is going to become (?)100 and we will have to fill the first spot with a linear combination of some bits. We XOR the last two bits of our initial state (0 and 1) and place the result on the empty spot. XOR(0,1)=1 so now we are left with 1100.
+The *output* of our initial, and current, state is 1 (*the output is the last bit*). Every time we iterate, we will shift all the bits one spot to the right; thus 1001 is going to become (?)100 and we will have to fill the first spot with a linear combination of some bits. We XOR the last two bits of our initial state (0 and 1) and place the result on the empty spot. XOR(0,1)=1 so now we are left with 1100.
 
 Now 1100 is our current state and the output is 0. Let's repeat the previous steps once again. We shift all the bits one position to the right and we are left with (?)110. We XOR the last two bits of the current state and place the result on the empty spot. XOR(0,0)=0 so now we are left with 0110.
 
@@ -44,7 +44,7 @@ We notice that to calculate all the states, the maximum time was needed. To clar
 
 To conclude this section, given __*n bits*__, the __*maximum period*__ would be __*2<sup>n</sup>-1*__.
 
-There is more than one way to compute an LFSR; it is done by using different __taps__  (points where you chose to perform the XOR). There are mathematical ... that ..., but they will  not be covered here.
+There is more than one way to compute an LFSR; it is done by using different *taps*  (*points where you chose to perform the XOR*). There are mathematical ways to chose the taps to get the result (e.g. time efficiency, more complicated XOR) you want, but they will  not be covered here.
 
 
 ## LFSR Code and Random Number Generator
@@ -58,6 +58,8 @@ for i in range(15):
 ```
 This script validates the calculations we did in the previous section. We notice that the 15th time the script is running, we return to the initial state.
 
+<img src="/lfsr-golomb_screens/res_01.png" width=50%>
+
 Now, we will create a pseudorandom number generator by changing only a few things in the above code; instead of printing all the states we will instead keep the last bit of each iteration and print them side by side:
 ```python
 state = 0b1001
@@ -66,6 +68,9 @@ for i in range(15):
   newBit = (state ^ (state >> 1)) & 1
   state = (state >> 1) | (newBit << 3)
 ```
+
+<img src="/lfsr-golomb_screens/res_02.png" width=70%>
+
 It is important to remember that LFSR generates __*pseudorandom*__ numbers.
 
 
@@ -95,6 +100,7 @@ We will now examine whether Golomb's postulates are true.
 __Postulate #1__: the number of 1s and 0s must be equal, or differ at most by 1. This means that if we have an even amount of bits, the number of 1s and 0s must be the same, and if we have an odd number of bits, the number of 1s should differ from the number of 0s by one.
 Our binary sequence has 31 0s and 32 1s. Thus, the first postulate is true.
 
+
 __Postulate #2__: 1/2 of the *runs (consecutive 1s and 0s)* must be of length 1, 1/4 of the runs must be of length 2 and 1/8 of the runs must be of length 3. We calculate 32 runs, of wich:
 - 16 runs are of length 1 (16/32=1/2)
 - 8 runs are of length 2 (8/32=1/4)
@@ -102,6 +108,7 @@ __Postulate #2__: 1/2 of the *runs (consecutive 1s and 0s)* must be of length 1,
 Thus, the second postulate is true.
 
 <img src="/lfsr-golomb_screens/runs.png" width=50%>
+
 
 __Postulate #3__: for period=1, the autocorrelation must be stable
 In order to go forth with the Python script implementtion, we must first understand what autocorrelation and what an autocorrelation function are.
